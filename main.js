@@ -5,7 +5,7 @@ let userList = [];
 
 let loginPage = document.querySelector('#loginPage');
 let chatPage = document.querySelector('#chatPage');
-let loginInput = document.querySelector('#loginInput'); // Corrigido o seletor
+let loginInput = document.querySelector('#loginInput'); 
 let textInput = document.querySelector('#chatTextInput');
 
 loginPage.style.display = 'flex';
@@ -39,13 +39,13 @@ function addMessage(type, user, msg) {
 }
 
 loginInput.addEventListener('keyup', (e) => {
-    if(e.keyCode === 13) {  // Se pressionar "Enter"
-        let name = loginInput.value.trim();  // Pega o nome digitado
+    if(e.keyCode === 13) {  
+        let name = loginInput.value.trim();  
         if(name != '') {
             username = name;
-            document.title = 'Chat(' + username + ')';  // Atualiza o título da aba do navegador
+            document.title = 'Chat(' + username + ')';  
 
-            socket.emit('join-request', username);  // Envia o nome ao servidor
+            socket.emit('join-request', username);  
         }
     }
 });
@@ -64,15 +64,13 @@ textInput.addEventListener('keyup', (e) => {
 });
 
 socket.on('user-ok', (list) => {
-    // Quando o servidor confirma que o usuário foi aceito:
-    loginPage.style.display = 'none';  // Esconde a página de login
-    chatPage.style.display = 'flex';   // Mostra a página de chat
-    textInput.focus();  // Foca no campo de digitação
-
+    loginPage.style.display = 'none';  
+    chatPage.style.display = 'flex';   
+    textInput.focus();  
     addMessage('status', null, 'Conectado!');
 
     userList = list;
-    renderUserList();  // Atualiza a lista de usuários conectados
+    renderUserList();  
 });
 
 
@@ -106,7 +104,7 @@ socket.on('reconnect', () => {
     addMessage('status', null, 'Reconectado!');
 
     if(username != '') {
-        socket.emit('join-request', username);  // Reenvia o nome ao servidor após reconectar
+        socket.emit('join-request', username); 
     }
 });
 

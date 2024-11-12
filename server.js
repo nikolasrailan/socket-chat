@@ -21,12 +21,10 @@ io.on('connection', (socket) => {
     socket.on('join-request', (username) => {
         socket.username = username;
         connectedUsers.push(username);
-        console.log(connectedUsers); // Exibe a lista de usuários conectados
-    
-        // Envia uma confirmação para o usuário que se conectou
+        console.log(connectedUsers); 
         socket.emit('user-ok', connectedUsers);
     
-        // Envia a atualização da lista para todos, exceto o usuário que se conectou
+     
         socket.broadcast.emit('list-update', {
             joined: username,
             list: connectedUsers
@@ -34,27 +32,23 @@ io.on('connection', (socket) => {
     });
     
 
-    // Quando o usuário desconectar
+    
     socket.on('disconnect', () => {
-        // Remove o usuário da lista de conectados
         connectedUsers = connectedUsers.filter(u => u !== socket.username);
-        console.log(connectedUsers); // Exibe a lista de usuários após a desconexão
+        console.log(connectedUsers); 
 
-        // Notifica todos os outros usuários que alguém saiu
         socket.broadcast.emit('list-update', {
             left: socket.username,
             list: connectedUsers
         });
     });
 
-    // Quando o usuário envia uma mensagem
     socket.on('send-msg', (txt) => {
         const obj = {
             username: socket.username,
             message: txt
         };
 
-        // Envia a mensagem para todos, exceto o usuário que a enviou
         socket.broadcast.emit('show-msg', obj);
     });
 });
