@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,12 +7,10 @@
     <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    
     <div class="page" id="loginPage">
         <h1>Qual seu nome?</h1>
-        <input type="text" id="loginInput" /> <!-- Corrigido o ID para loginInput -->
+        <input type="text" id="loginNameInput" />
     </div>
-    
 
     <div class="page" id="chatPage">
         <div class="chatArea">
@@ -19,6 +18,12 @@
             <ul class="userList"></ul>
         </div>
         <div class="chatInput">
+            <select id="roomSelect">
+                <option value="">Escolha uma sala</option>
+                <option value="sala1">Sala 1</option>
+                <option value="sala2">Sala 2</option>
+                <option value="sala3">Sala 3</option>
+            </select>
             <input type="text" id="chatTextInput" placeholder="Digite uma mensagem (e aperte ENTER)" />
         </div>
     </div>
